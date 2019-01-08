@@ -1,0 +1,17 @@
+$gap: 2px;
+
+.masonry {
+    column-count: 3;
+    column-gap: $gap;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    .item {
+        text-align: center;
+        padding: 2em;
+        margin-bottom: $gap;
+        break-inside: avoid;
+        background: #f60;
+    }
+}

@@ -1,64 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const commonConfig = require('./webpack.common');
 
 const plugins = [
-    new HtmlWebpackPlugin({
-        template: './src/index.html',
-        chunks: [
-            'index',
-        ],
-        hash: true,
-    }),
+    ...commonConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
 ];
 
 const config = {
+    ...commonConfig,
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
+        contentBase: [path.join(__dirname, './public/')],
         hot: true,
         host: '0.0.0.0',// can be accessed by other hosts
+        port: 8080,
         proxy: {
             '/api': 'http://localhost:8081'
         },
-    },
-    entry: {
-        index: ['./src/index.js'],
-    },
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-        rules: [{
-            test: /\.jsx?/,
-            use: 'babel-loader',
-            exclude: /node_modules/,
-        }, {
-            test: /\.(css|scss)$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'sass-loader',
-            ],
-            exclude: /node_modules/,
-        }, {
-            test: /\.(png|jpg|gif|svg)$/,
-            use: [
-                'file-loader',
-            ],
-            exclude: /node_modules/,
-        }],
+        compress: true,
+        // https: true,
+        // open: true,
     },
     plugins,
-    resolve: {
-        alias: {
-            '@src': path.resolve(__dirname, './src/'),
-        }
-    }
 }
 
 module.exports = config;

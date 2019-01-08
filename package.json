@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env webpack-dev-server --config ./webpack.dev.js",
-    "build": "cross-env webpack"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "author": "xiongwei",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.0",
     "cross-env": "^5.2.0",
+    "css-hot-loader": "^1.4.3",
     "css-loader": "^2.0.1",
     "file-loader": "^2.0.0",
     "gulp": "^4.0.0",
