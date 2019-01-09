@@ -1,9 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Axios from 'axios';
-import { hot } from 'react-hot-loader/root';
+// import '@babel/polyfill';
+// import { hot } from 'react-hot-loader/root';
 
-import '@src/css/base.scss';
-import './waterfall.scss';
+import '@css/common/base.scss';
+import '@css/waterfall/waterfall.scss';
 
 const Item = (props) => {
     return (
@@ -11,7 +13,7 @@ const Item = (props) => {
             <div className="item-content">{props.height}</div>
         </div>
     );
-}
+};
 
 class App extends React.Component {
     constructor(props) {
@@ -39,4 +41,8 @@ class App extends React.Component {
     }
 }
 
-export default hot(App);
+// export default hot(App);
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);

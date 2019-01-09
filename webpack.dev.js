@@ -3,11 +3,6 @@ const webpack = require('webpack');
 
 const commonConfig = require('./webpack.common');
 
-const plugins = [
-    ...commonConfig.plugins,
-    new webpack.HotModuleReplacementPlugin(),
-];
-
 const config = {
     ...commonConfig,
     mode: 'development',
@@ -24,7 +19,10 @@ const config = {
         // https: true,
         // open: true,
     },
-    plugins,
+    plugins: [
+        ...commonConfig.plugins,
+        new webpack.HotModuleReplacementPlugin(),
+    ],
 }
 
 module.exports = config;

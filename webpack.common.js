@@ -1,24 +1,55 @@
 const path = require('path');
+const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+
 // const isProd = process.env.NODE_ENV === 'production';
 
-const entry = {
-    index: ['./src/index.js'],
-};
+// 遍历`./src/pages/`，找出里面的JS，并生成webpack entry
+const getEntry = (() => {
+    let entry = null;
+    return () => {
+        if (entry) {
+            return entry;
+        }
+        entry = {};
+        const root = './src/pages/';
+        for (let filename of glob.sync(root + '**/*.js')) {
+            const idx = filename.lastIndexOf(root) + root.length;
+            const entryKey = filename.slice(idx, -3);
+            entry[entryKey] = filename;
+        }
+        return entry;
+    }
+})();
 
-const plugins = [
-    new HtmlWebpackPlugin({
-        // template: './src/index.html',
+const entry = getEntry();
+
+// 根据entry生成对应的HtmlWebpackPlugin()插件配置
+const htmls = [];
+for (let key in entry) {
+    const conf = {
         title: 'fe-project',
         filename: 'index.html',
         meta: { 'viewport': 'width=device-width, initial-scale=1.0' },
-        chunks: ['vendors', 'index'],
+        chunks: ['common/vendors', key],
         hash: true,
-    }),
+    };
+    if (key.indexOf('index/index') >= 0) {
+        htmls.push(new HtmlWebpackPlugin(conf));
+        continue;
+    }
+    htmls.push(new HtmlWebpackPlugin({
+        ...conf,
+        template: './src/pages/' + key + '.html',
+        filename: path.basename(key) + '.html',
+    }))
+}
+
+const plugins = [
+    ...htmls,
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
@@ -65,6 +96,8 @@ const modules = {
 const resolve = {
     alias: {
         '@src': path.resolve(__dirname, './src/'),
+        '@css': path.resolve(__dirname, './src/css/'),
+        '@lib': path.resolve(__dirname, './src/lib'),
     },
 };
 
@@ -73,7 +106,7 @@ const optimization = {
         chunks: 'initial',
         cacheGroups: {
             vendors: {
-                name: 'vendors',
+                name: 'common/vendors',
                 test: /node_modules/,
                 priority: -10,
             },
@@ -83,9 +116,10 @@ const optimization = {
     //     name: 'runtime',
     // },
     minimizer: [
-        new UglifyJsPlugin({
+        new TerserPlugin({
+            cache: true,
             parallel: true,
-            sourceMap: true,
+            sourceMap: true, // Must be set to true if using source-maps in production
         }),
         new OptimizeCSSAssetsPlugin({}),// 这个会阻止webpack4 production模式的自动压缩功能，需要单独使用UglifyJsPlugin
     ],
