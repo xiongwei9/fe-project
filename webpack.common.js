@@ -16,7 +16,7 @@ const getEntry = (() => {
         }
         entry = {};
         const root = './src/pages/';
-        for (let filename of glob.sync(root + '**/*.js')) {
+        for (let filename of glob.sync(root + '**/*.[jt]s')) {
             const idx = filename.lastIndexOf(root) + root.length;
             const entryKey = filename.slice(idx, -3);
             entry[entryKey] = filename;
@@ -39,6 +39,10 @@ for (let key in entry) {
     };
     if (key.indexOf('index/index') >= 0) {
         htmls.push(new HtmlWebpackPlugin(conf));
+        continue;
+    }
+    if (key == 'index') {
+        htmls.push(new HtmlWebpackPlugin({...conf, filename: 'tsIndex.html'}));
         continue;
     }
     htmls.push(new HtmlWebpackPlugin({
@@ -68,6 +72,10 @@ const output = {
 const modules = {
     rules: [
         {
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+        }, {
             test: /\.jsx?/,
             use: 'babel-loader',
             include: [path.resolve(__dirname, './src')],

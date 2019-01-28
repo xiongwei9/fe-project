@@ -1,10 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 
 const commonConfig = require('./webpack.common');
 
-const config = {
-    ...commonConfig,
+module.exports = merge(commonConfig, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
@@ -20,9 +20,6 @@ const config = {
         // open: true,
     },
     plugins: [
-        ...commonConfig.plugins,
         new webpack.HotModuleReplacementPlugin(),
     ],
-}
-
-module.exports = config;
+});
