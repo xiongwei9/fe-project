@@ -1,0 +1,19 @@
+body {
+    background-color: #607d8b;
+}
+
+li {
+    padding: 12px 15px 0;
+
+    a {
+        box-sizing: border-box;
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 5px;
+        color: #009688;
+        background: #cfdeec;
+        white-space: nowrap;
+        text-align: center;
+        cursor: pointer;
+    }
+}
