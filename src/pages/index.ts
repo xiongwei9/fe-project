@@ -1,20 +1,43 @@
 console.log('hello ts');
 
 
-interface ObjValue {
-    label: string;
-    size: number;
-    color?: string;
+interface Animal {
+    name: string;
+    age: number;
 }
 
-function print(obj: ObjValue): void {
-    console.log(obj.label);
-}
-
-let myObj = {
-    size: 10,
-    label: 'xxx',
-    colour: 'black',
+const ani: Animal = {
+    name: 'dog',
+    age: 1,
 };
+console.log(ani);
 
-print(myObj);
+class Dog implements Animal {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+const dog = new Dog('puppy', 1);
+
+console.log(dog);
+
+
+
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let myIdentity: <T>(arg: T) => T = identity;
+
+console.log(myIdentity);
+
+let func = (a:number, b: number): number => {
+    return a + b;
+}
+
+console.log(func(1, 2));
