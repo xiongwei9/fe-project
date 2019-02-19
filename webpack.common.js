@@ -77,7 +77,10 @@ const modules = {
             exclude: /node_modules/,
         }, {
             test: /\.jsx?/,
-            use: 'babel-loader',
+            use: [
+                'babel-loader',
+                'eslint-loader',
+            ],
             include: [path.resolve(__dirname, './src')],
             exclude: /node_modules/,
         }, {

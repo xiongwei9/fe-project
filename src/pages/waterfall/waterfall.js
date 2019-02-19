@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom';
-import Axios from 'axios';
+import { BrowserRouter as Router } from 'react-router-dom';
+// import Axios from 'axios';
 
 import '@css/common/base.scss';
 import '@css/waterfall/waterfall.scss';
