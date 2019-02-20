@@ -10,10 +10,7 @@ import NavList from '@src/components/NavList';
 
 
 const AppRouter = () => (
-    <Router basename="/waterfall.html" getUserConfirmation={(message, callback) => {
-        const allowTransition = window.confirm(message);
-        callback(allowTransition);
-    }}>
+    <Router basename="/waterfall.html">
         <React.Fragment>
             <header>
                 <NavList className="ss" />

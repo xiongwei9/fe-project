@@ -20,7 +20,7 @@ class NavList extends React.Component {
     render() {
 
         const list = !this.state.showList || !Array.isArray(this.props.linkList) ? null : this.props.linkList.map(() => {
-
+            return null;
         });
 
         return (
