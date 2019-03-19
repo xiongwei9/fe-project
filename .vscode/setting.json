@@ -1,0 +1,10 @@
+{
+    "editor.cursorBlinking": "phase",
+    "editor.find.seedSearchStringFromSelection": false,
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.fontSize": 18,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "extensions.ignoreRecommendations": true,
+    "terminal.integrated.fontSize": 16
+}
