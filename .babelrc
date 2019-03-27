@@ -1,18 +1,18 @@
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "targets": {
-                    "chrome": "58",
-                    "edge": "13"
-                },
-                "useBuiltIns": "entry"
-            }
-        ],
-        "@babel/preset-react"
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "58",
+          "edge": "13"
+        },
+        "useBuiltIns": "entry"
+      }
     ],
-    "plugins": [
-        "react-hot-loader/babel"
-    ]
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
 }

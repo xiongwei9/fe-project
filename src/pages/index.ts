@@ -2,24 +2,24 @@ console.log('hello ts');
 
 
 interface Animal {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 
 const ani: Animal = {
-    name: 'dog',
-    age: 1,
+  name: 'dog',
+  age: 1,
 };
 console.log(ani);
 
 class Dog implements Animal {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name;
-        this.age = age;
-    }
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
 }
 
 const dog = new Dog('puppy', 1);
@@ -29,7 +29,7 @@ console.log(dog);
 
 
 function identity<T>(arg: T): T {
-    return arg;
+  return arg;
 }
 
 let myIdentity: <T>(arg: T) => T = identity;
@@ -37,7 +37,7 @@ let myIdentity: <T>(arg: T) => T = identity;
 console.log(myIdentity);
 
 let func = (a:number, b: number): number => {
-    return a + b;
+  return a + b;
 }
 
 console.log(func(1, 2));

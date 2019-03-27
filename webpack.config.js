@@ -4,9 +4,9 @@ const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 
 module.exports = merge(commonConfig, {
-    mode: 'production',
-    devtool: 'source-map',
-    plugins: [
-        new CleanWebpackPlugin(['./dist/*']),
-    ],
+  mode: 'production',
+  devtool: 'source-map',
+  plugins: [
+    new CleanWebpackPlugin(['./dist/*']),
+  ],
 });

@@ -10,16 +10,16 @@ import NavList from '@src/components/NavList';
 
 
 const AppRouter = () => (
-    <Router basename="/waterfall.html">
-        <React.Fragment>
-            <header>
-                <NavList className="ss" />
-            </header>
-        </React.Fragment>
-    </Router>
+  <Router basename="/waterfall.html">
+    <React.Fragment>
+      <header>
+        <NavList className="ss" />
+      </header>
+    </React.Fragment>
+  </Router>
 );
 
 ReactDOM.render(
-    <AppRouter />,
-    document.getElementById('root')
+  <AppRouter />,
+  document.getElementById('root')
 );

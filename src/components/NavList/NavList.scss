@@ -1,34 +1,34 @@
 $navToggleHeight: 24px;
 
 .m_navToggle {
-    width: $navToggleHeight;
-    height: $navToggleHeight;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  width: $navToggleHeight;
+  height: $navToggleHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
-    span {
-        display: inline-block;
-        width: 100%;
-        height: 3px;
-        background: #000;
-        transition: all .3s ease-out;
+  span {
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    transition: all .3s ease-out;
+  }
+  .secondLine {
+    margin: 7px 0;
+  }
+
+  &.showClose {
+    .firstLine {
+      transform: rotate(45deg) translate3d(7px,7px,0);
+      transform-origin: center;
     }
     .secondLine {
-        margin: 7px 0;
+      transform: rotate(45deg) scale3d(0,0,0);
+      opacity: 0;
     }
-
-    &.showClose {
-        .firstLine {
-            transform: rotate(45deg) translate3d(7px,7px,0);
-            transform-origin: center;
-        }
-        .secondLine {
-            transform: rotate(45deg) scale3d(0,0,0);
-            opacity: 0;
-        }
-        .thirdLine {
-            transform: rotate(-45deg) translate3d(7px,-7px,0);
-        }
+    .thirdLine {
+      transform: rotate(-45deg) translate3d(7px,-7px,0);
     }
+  }
 }
