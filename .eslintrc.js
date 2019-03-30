@@ -18,10 +18,11 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "react-hooks",
   ],
   "rules": {
-    "no-console": "warn",
+    "no-console": "off",
     "no-alert": "warn",
     "no-trailing-spaces": "warn",
     "no-debugger": "warn",
@@ -67,5 +68,7 @@ module.exports = {
     "wrap-iife": ["error", "inside"],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
+    "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
+    "react-hooks/exhaustive-deps": "warn", // 检查 effect 的依赖
   },
 };

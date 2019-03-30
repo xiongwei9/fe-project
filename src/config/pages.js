@@ -6,4 +6,5 @@
 export const pageMap = {
   'waterfall': 'waterfall images',
   'music': 'music player',
+  'reactHook': 'react hook demo',
 };

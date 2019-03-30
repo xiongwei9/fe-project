@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import '@css/common/base.scss';
 import './index.scss';
 
-import { pageMap } from '@src/constants';
+import { pageMap } from '@src/config/pages';
 
 const App = () => {
   const lis = [];
