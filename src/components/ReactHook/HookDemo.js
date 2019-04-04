@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 
 const Api = function() {
@@ -24,7 +24,6 @@ const Api = function() {
     }
   };
 };
-
 window.api = new Api();
 
 function useStatus() {
@@ -83,17 +82,24 @@ const App = () => {
     };
   });
 
+  const onBtnClick = () => {
+    import('../../utils/Util')
+      .then(res => res.go());
+    setCount(count + 1);
+    setUser({...user, name: user.name + count});
+  };
+
   return (
-    <div>
+    <Fragment>
       <p>times: {count}</p>
       {/* <p>name: {user.name}    age: {user.age}</p> */}
-      <button onClick={() => {setCount(count + 1); setUser({...user, name: user.name + count});}}>Click</button>
+      <button onClick={onBtnClick}>Click</button>
       <p>name: {isOnline ? 'xiongwei' : 'nobody'}</p>
       <div>
         <button onClick={() => setUser({ ...user, name: user.name + count })}>change</button>
         <Component name={user.name} />
       </div>
-    </div>
+    </Fragment>
   );
 };
 
