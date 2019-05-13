@@ -20,7 +20,7 @@ const App = () => {
       console.log('error from worker: ', err);
     };
     return () => {
-      worker.terminate();
+      // worker.terminate();
     };
   });
 

@@ -88,6 +88,9 @@ const modules = {
       test: /\.worker\.js$/,
       use: {
         loader: 'worker-loader',
+	options: {
+	    name: './js-workers/[name].[hash].js',
+	},
       },
     }, {
       test: /\.(png|jpg|gif|svg)$/,
