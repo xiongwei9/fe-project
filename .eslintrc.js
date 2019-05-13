@@ -3,12 +3,15 @@ module.exports = {
   "env": {
     "browser": true,
     // "node": true,
-    "es6": true
+    "es6": true,
+    "worker": true,
   },
   "extends": "eslint:recommended",
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "module": true, // `WebWorker` needs
+    "__webpack_public_path__": true, // `WebWorker` needs
   },
   "parserOptions": {
     "ecmaFeatures": {

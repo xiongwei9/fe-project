@@ -66,6 +66,7 @@ const output = {
   filename: 'js/[name].js',
   path: path.resolve(__dirname, 'dist'),
   publicPath: '',// http://localhost:8080
+  globalObject: 'this', // 使用web worker时必须是this，不能window
 };
 
 // module是CommonJS的模块变量，在此使用modules代替
@@ -83,6 +84,11 @@ const modules = {
       ],
       include: [path.resolve(__dirname, './src')],
       exclude: /node_modules/,
+    }, {
+      test: /\.worker\.js$/,
+      use: {
+        loader: 'worker-loader',
+      },
     }, {
       test: /\.(png|jpg|gif|svg)$/,
       use: [
