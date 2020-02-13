@@ -3,5 +3,8 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "target": "es5",
+    "jsx": "react",
+
+    "experimentalDecorators": true
   }
 }

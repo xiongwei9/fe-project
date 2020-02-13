@@ -16,9 +16,10 @@ const getEntry = (() => {
     }
     entry = {};
     const root = './src/pages/';
-    for (let filename of glob.sync(root + '**/*.[jt]s')) {
+    for (let filename of glob.sync(root + '**/*.[jt]s?(x)')) {
       const idx = filename.lastIndexOf(root) + root.length;
-      const entryKey = filename.slice(idx, -3);
+      const dotIdx = filename.lastIndexOf('.');
+      const entryKey = filename.slice(idx, dotIdx);
       entry[entryKey] = filename;
     }
     return entry;
@@ -88,9 +89,9 @@ const modules = {
       test: /\.worker\.js$/,
       use: {
         loader: 'worker-loader',
-	options: {
-	    name: './js-workers/[name].[hash].js',
-	},
+      	options: {
+          name: './js-workers/[name].[hash].js',
+        },
       },
     }, {
       test: /\.(png|jpg|gif|svg)$/,
