@@ -1,57 +1,41 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Provider, observer, inject } from 'mobx-react';
 
-console.log('hello ts');
+import { Form } from '../components/tsIndex/Form.tsx';
+import UserStore from '../components/tsIndex/store/User.ts';
 
 
-interface Animal {
-    name: string;
-    age: number;
-}
-
-const ani: Animal = {
-    name: 'dog',
-    age: 1,
-};
-console.log(ani);
-
-class Dog implements Animal {
-    name: string;
-    age: number;
-
-    constructor(name: string, age: number) {
-        this.name = name;
-        this.age = age;
-    }
-}
-
-const dog = new Dog('puppy', 1);
-
-console.log(dog);
-
-function identity<T>(arg: T): T {
-    return arg;
-}
-
-let myIdentity: <T>(arg: T) => T = identity;
-
-console.log(myIdentity);
-
-let func = (a: number, b: number): number => {
-    return a + b;
-}
-
-console.log(func(1, 2));
-
-const $app = document.createElement('div');
-$app.setAttribute('id', 'app');
+const $app: Element = document.createElement('div');
+$app.setAttribute('id', 'root');
 document.body.appendChild($app);
 
-const App = () => (
-    <div>hello</div>
-);
+interface AppStoreProps {
+    user?: UserStore;
+}
+const rootStore: AppStoreProps = {
+    user: new UserStore(),
+};
+
+// problem: 这里inject的值怎么没有 typescript 的智能提示
+const App = inject('user')(observer(({user}: {user?: UserStore}) => {
+    const clickEvent = () => {
+        user.addAge();
+        user.setName('oh, you are ' + user.age);
+    };
+    return (
+        <div className="app">
+            <Form name="xiongwei" age={1}></Form>
+            <div>this is data from user store: {user.name}</div>
+            <button onClick={clickEvent}>set user store</button>
+        </div>
+    );
+}));
+
 
 ReactDOM.render(
-    <App />,
+    <Provider {...rootStore}>
+        <App />
+    </Provider>,
     $app
 );
